@@ -1,0 +1,35 @@
+syntax = "proto3";
+
+option go_package = "/pb";
+
+package api;
+
+
+service AccessControlManager {
+    rpc AddUser (AddUserRequest) returns (AddUserResponse);
+    rpc CheckAccess (CheckAccessRequest) returns (CheckAccessResponse);
+}
+
+enum AccessLevel {
+    NO_ACCESS = 0;
+    LEVEL_1 = 1;
+    LEVEL_2 = 2;
+    ADMIN = 3;
+}
+
+message AddUserRequest {
+    string name = 1;
+    string chipCardId = 2;
+    int32 AccessRights = 3;
+}
+
+message AddUserResponse {}
+
+message CheckAccessRequest {
+    string chipCardId = 1;
+    int32 doorLevel = 2;
+}
+
+message CheckAccessResponse {
+    bool hasAccess = 1;
+}
