@@ -18,7 +18,6 @@ const (
 )
 
 var (
-	testServer *grpc.Server
 	testClient pb.AccessControlManagerClient
 )
 
@@ -26,7 +25,9 @@ func TestMain(m *testing.M) {
 
 	log := slog.New(slog.NewTextHandler(os.Stderr, nil))
 
-	server := internal.ServerInit()
+    mockDB := &internal.MockDB{}
+	
+	server := internal.ServerInit(mockDB)
 	log.Info("server initated")
 
 	lis, err := net.Listen("tcp", port)
@@ -61,19 +62,23 @@ func TestMain(m *testing.M) {
 	os.Exit(exitCode)
 }
 
-
-func TestAddUserAndCheck(t *testing.T) {
+func TestAddUser(t *testing.T) {
 
 	// add user 
 	addUserReq := &pb.AddUserRequest{
 		Name:         "Anna",
-		ChipCardId:   "123",
+		ChipCardId:   "1234",
 		AccessRights: int32(pb.AccessLevel_LEVEL_1),
 	}
 	_, err := testClient.AddUser(context.Background(), addUserReq)
 	if err != nil {
 		t.Error("failed to add user")
 	}
+
+}
+
+
+func TestCheckAccess(t *testing.T) {
 
 	testCases := []struct {
 		ChipCardID string
@@ -106,7 +111,7 @@ func TestAddUserAndCheck(t *testing.T) {
 	}
 
 	// 	time=2024-04-21T12:26:05.889+02:00 level=INFO msg="server initated"
-	// Access granted: Welcome, Anna!
+	// Access granted: Welcome, mockUser!
 	// Access denied: Insufficient access rights
 	// Access denied: Unknown chip card ID
 	// PASS
