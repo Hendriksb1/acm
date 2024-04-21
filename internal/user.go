@@ -4,6 +4,9 @@ import (
 	"acm/api/pb"
 	"context"
 	"fmt"
+
+	"google.golang.org/grpc/codes"
+	"google.golang.org/grpc/status"
 )
 
 // User represents a user with a chip card
@@ -15,6 +18,15 @@ type User struct {
 
 // AddUser adds a new user to the access control system
 func(s *Server) AddUser(ctx context.Context, req *pb.AddUserRequest) (*pb.AddUserResponse, error){
+
+    if req.Name == "" {
+        return nil, status.Error(codes.InvalidArgument, "no name")
+    }
+
+    if req.ChipCardId == "" {
+        return nil, status.Error(codes.InvalidArgument, "no chip card id")
+    }
+
     user := &User{
 		Name: req.Name,
 		ChipCardID: req.ChipCardId,
@@ -32,22 +44,30 @@ func(s *Server) AddUser(ctx context.Context, req *pb.AddUserRequest) (*pb.AddUse
 // CheckAccess checks if a user with the given chip card ID has access rights to a door
 func(s *Server) CheckAccess(ctx context.Context, req *pb.CheckAccessRequest) (*pb.CheckAccessResponse, error){
 
+    if req.ChipCardId == "" {
+        return nil, status.Error(codes.InvalidArgument, "no id")
+    }
+
+    if req.DoorLevel == 0 {
+        return nil, status.Error(codes.InvalidArgument, "no door level")
+    }
+
 	user, err := s.DB.GetUserByChipCardId(req.ChipCardId)
 	if err != nil {
-        fmt.Println("access denied: Unknown chip card ID")
+        fmt.Println("access denied: unknown chip card ID")
 		return &pb.CheckAccessResponse{
 			HasAccess: false,
 		}, nil
 	}
 
     if user.AccessRights >= req.DoorLevel {
-        fmt.Printf("access granted: Welcome, %s!\n", user.Name)
+        fmt.Printf("access granted: welcome, %s!\n", user.Name)
         return &pb.CheckAccessResponse{
 			HasAccess: true,
 		}, nil
     }
 
-    fmt.Println("access denied: Insufficient access rights")
+    fmt.Println("access denied: insufficient access rights")
     return  &pb.CheckAccessResponse{
 		HasAccess: false,
 	}, nil
