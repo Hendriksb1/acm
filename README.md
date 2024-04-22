@@ -19,4 +19,9 @@ To run the ACM service, you need:
 
 ```bash
 git clone <repository-url>
-cd acm
+cd acm   
+
+2. Run docker:
+
+docker run -p 8080:8080 acm
+docker-compose up db
