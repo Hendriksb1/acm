@@ -9,12 +9,16 @@ import (
 	"net"
 	"os"
 	"testing"
+
+	_ "github.com/lib/pq"
+
 	"golang.org/x/exp/slog"
 	"google.golang.org/grpc"
 )
 
 const (
-	port = ":50051"
+	port         = ":50051"
+	dbConnString = "host=localhost port=5432 user=username password=password dbname=database_name sslmode=disable"
 )
 
 var (
@@ -25,9 +29,19 @@ func TestMain(m *testing.M) {
 
 	log := slog.New(slog.NewTextHandler(os.Stderr, nil))
 
-    mockDB := &internal.MockDB{}
-	
-	server := internal.ServerInit(mockDB)
+	postgresDB, err := internal.NewPostgresDB(dbConnString, log)
+	if err != nil {
+		return
+	}
+	log.Info("db connected", dbConnString)
+
+	err = postgresDB.InnitUserTable(log)
+	if err != nil {
+		return
+	}
+	log.Info("users table initated")
+
+	server := internal.ServerInit(postgresDB)
 	log.Info("server initated")
 
 	lis, err := net.Listen("tcp", port)
@@ -54,29 +68,31 @@ func TestMain(m *testing.M) {
 
 	testClient = pb.NewAccessControlManagerClient(conn)
 
+	// add user
+	addUserReq := &pb.AddUserRequest{
+		Name:         "Anna",
+		ChipCardId:   "123",
+		AccessRights: int32(pb.AccessLevel_LEVEL_1),
+	}
+	_, err = testClient.AddUser(context.Background(), addUserReq)
+	if err != nil {
+		log.Error("failed to add user", err)
+	}
+
 	// Run tests
 	exitCode := m.Run()
+
+	_, err = testClient.DeleteUserByChipCardId(context.Background(), &pb.DeleteUserByChipCardIdRequest{
+		ChipCardId: "123",
+	})
+	if err != nil {
+		log.Error("failed to delete user", err)
+	}
 
 	// Shutdown the server
 	grpcServer.Stop()
 	os.Exit(exitCode)
 }
-
-func TestAddUser(t *testing.T) {
-
-	// add user 
-	addUserReq := &pb.AddUserRequest{
-		Name:         "Anna",
-		ChipCardId:   "1234",
-		AccessRights: int32(pb.AccessLevel_LEVEL_1),
-	}
-	_, err := testClient.AddUser(context.Background(), addUserReq)
-	if err != nil {
-		t.Error("failed to add user")
-	}
-
-}
-
 
 func TestCheckAccess(t *testing.T) {
 
@@ -107,7 +123,7 @@ func TestCheckAccess(t *testing.T) {
 		}
 		if res.HasAccess != c.Expected {
 			t.Error("expected", c.Expected, "but got", res.HasAccess)
-		}				
+		}
 	}
 
 	// 	time=2024-04-21T12:26:05.889+02:00 level=INFO msg="server initated"

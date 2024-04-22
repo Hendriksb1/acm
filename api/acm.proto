@@ -7,6 +7,7 @@ package api;
 
 service AccessControlManager {
     rpc AddUser (AddUserRequest) returns (AddUserResponse);
+    rpc DeleteUserByChipCardId (DeleteUserByChipCardIdRequest) returns (DeleteUserByChipCardIdResponse);
     rpc CheckAccess (CheckAccessRequest) returns (CheckAccessResponse);
 }
 
@@ -32,4 +33,11 @@ message CheckAccessRequest {
 
 message CheckAccessResponse {
     bool hasAccess = 1;
+}
+
+message DeleteUserByChipCardIdRequest {
+    string chipCardId = 1;
+}
+
+message DeleteUserByChipCardIdResponse {
 }

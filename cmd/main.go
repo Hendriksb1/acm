@@ -3,42 +3,53 @@ package main
 import (
 	pb "acm/api/pb"
 	"acm/internal"
-	"log"
 	"net"
-
 	"os"
+
+	_ "github.com/lib/pq"
 
 	"golang.org/x/exp/slog"
 	"google.golang.org/grpc"
 )
 
 const (
-	port = ":50051"
+	port         = ":50051"
+	dbConnString = "host=localhost port=5432 user=username password=password dbname=database_name sslmode=disable"
 )
 
 func main() {
 
-	logger := slog.New(slog.NewTextHandler(os.Stderr, nil))
+	log := slog.New(slog.NewTextHandler(os.Stderr, nil))
 
-    postgresDB := &internal.PostgresDB{}
+	postgresDB, err := internal.NewPostgresDB(dbConnString, log)
+	if err != nil {
+		return
+	}
+	log.Info("db connected", dbConnString)
+
+	err = postgresDB.InnitUserTable(log)
+	if err != nil {
+		return
+	}
+	log.Info("users table initated")
 
 	server := internal.ServerInit(postgresDB)
-	logger.Info("server initated")
+	log.Info("server initated")
 
 	lis, err := net.Listen("tcp", port)
 	if err != nil {
-		log.Fatalf("failed to listen: %v", err)
+		log.Error("failed to listen", err)
 	}
-	logger.Info("listening on port", port)
+	log.Info("listening on port", port)
 
 	grpcServer := grpc.NewServer()
 	pb.RegisterAccessControlManagerServer(grpcServer, server)
 
 	go func() {
 		if err := grpcServer.Serve(lis); err != nil {
-			logger.Error("failed to serve: %v", err)
+			log.Error("failed to serve: %v", err)
 		}
 	}()
 
-	logger.Info("grpc service registered")
+	log.Info("grpc service registered")
 }

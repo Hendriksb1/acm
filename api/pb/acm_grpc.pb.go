@@ -23,6 +23,7 @@ const _ = grpc.SupportPackageIsVersion7
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type AccessControlManagerClient interface {
 	AddUser(ctx context.Context, in *AddUserRequest, opts ...grpc.CallOption) (*AddUserResponse, error)
+	DeleteUserByChipCardId(ctx context.Context, in *DeleteUserByChipCardIdRequest, opts ...grpc.CallOption) (*DeleteUserByChipCardIdResponse, error)
 	CheckAccess(ctx context.Context, in *CheckAccessRequest, opts ...grpc.CallOption) (*CheckAccessResponse, error)
 }
 
@@ -43,6 +44,15 @@ func (c *accessControlManagerClient) AddUser(ctx context.Context, in *AddUserReq
 	return out, nil
 }
 
+func (c *accessControlManagerClient) DeleteUserByChipCardId(ctx context.Context, in *DeleteUserByChipCardIdRequest, opts ...grpc.CallOption) (*DeleteUserByChipCardIdResponse, error) {
+	out := new(DeleteUserByChipCardIdResponse)
+	err := c.cc.Invoke(ctx, "/api.AccessControlManager/DeleteUserByChipCardId", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *accessControlManagerClient) CheckAccess(ctx context.Context, in *CheckAccessRequest, opts ...grpc.CallOption) (*CheckAccessResponse, error) {
 	out := new(CheckAccessResponse)
 	err := c.cc.Invoke(ctx, "/api.AccessControlManager/CheckAccess", in, out, opts...)
@@ -57,6 +67,7 @@ func (c *accessControlManagerClient) CheckAccess(ctx context.Context, in *CheckA
 // for forward compatibility
 type AccessControlManagerServer interface {
 	AddUser(context.Context, *AddUserRequest) (*AddUserResponse, error)
+	DeleteUserByChipCardId(context.Context, *DeleteUserByChipCardIdRequest) (*DeleteUserByChipCardIdResponse, error)
 	CheckAccess(context.Context, *CheckAccessRequest) (*CheckAccessResponse, error)
 	mustEmbedUnimplementedAccessControlManagerServer()
 }
@@ -67,6 +78,9 @@ type UnimplementedAccessControlManagerServer struct {
 
 func (UnimplementedAccessControlManagerServer) AddUser(context.Context, *AddUserRequest) (*AddUserResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method AddUser not implemented")
+}
+func (UnimplementedAccessControlManagerServer) DeleteUserByChipCardId(context.Context, *DeleteUserByChipCardIdRequest) (*DeleteUserByChipCardIdResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteUserByChipCardId not implemented")
 }
 func (UnimplementedAccessControlManagerServer) CheckAccess(context.Context, *CheckAccessRequest) (*CheckAccessResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CheckAccess not implemented")
@@ -102,6 +116,24 @@ func _AccessControlManager_AddUser_Handler(srv interface{}, ctx context.Context,
 	return interceptor(ctx, in, info, handler)
 }
 
+func _AccessControlManager_DeleteUserByChipCardId_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteUserByChipCardIdRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AccessControlManagerServer).DeleteUserByChipCardId(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.AccessControlManager/DeleteUserByChipCardId",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AccessControlManagerServer).DeleteUserByChipCardId(ctx, req.(*DeleteUserByChipCardIdRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _AccessControlManager_CheckAccess_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(CheckAccessRequest)
 	if err := dec(in); err != nil {
@@ -130,6 +162,10 @@ var AccessControlManager_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "AddUser",
 			Handler:    _AccessControlManager_AddUser_Handler,
+		},
+		{
+			MethodName: "DeleteUserByChipCardId",
+			Handler:    _AccessControlManager_DeleteUserByChipCardId_Handler,
 		},
 		{
 			MethodName: "CheckAccess",

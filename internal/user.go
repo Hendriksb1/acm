@@ -72,3 +72,16 @@ func(s *Server) CheckAccess(ctx context.Context, req *pb.CheckAccessRequest) (*p
 		HasAccess: false,
 	}, nil
 }
+
+func(s *Server) DeleteUserByChipCardId(ctx context.Context, req *pb.DeleteUserByChipCardIdRequest) (*pb.DeleteUserByChipCardIdResponse, error){
+    if req.ChipCardId == "" {
+        return nil, status.Error(codes.InvalidArgument, "no id")
+    }
+
+    err := s.DB.DeleteUserByChipCardId(req.ChipCardId)
+    if err != nil {
+		return nil, err
+	}
+
+    return &pb.DeleteUserByChipCardIdResponse{}, nil
+}
