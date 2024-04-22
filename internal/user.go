@@ -73,6 +73,7 @@ func(s *Server) CheckAccess(ctx context.Context, req *pb.CheckAccessRequest) (*p
 	}, nil
 }
 
+// DeleteUserByChipCardId deletes a user from the database based on the chip card ID.
 func(s *Server) DeleteUserByChipCardId(ctx context.Context, req *pb.DeleteUserByChipCardIdRequest) (*pb.DeleteUserByChipCardIdResponse, error){
     if req.ChipCardId == "" {
         return nil, status.Error(codes.InvalidArgument, "no id")
