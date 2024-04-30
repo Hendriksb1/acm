@@ -10,15 +10,11 @@ import (
 	"os"
 	"testing"
 
+	"github.com/joho/godotenv"
 	_ "github.com/lib/pq"
 
 	"golang.org/x/exp/slog"
 	"google.golang.org/grpc"
-)
-
-const (
-	port         = ":50051"
-	dbConnString = "host=localhost port=5432 user=username password=password dbname=database_name sslmode=disable"
 )
 
 var (
@@ -28,6 +24,14 @@ var (
 func TestMain(m *testing.M) {
 
 	log := slog.New(slog.NewTextHandler(os.Stderr, nil))
+
+	// Load .env file
+	if err := godotenv.Load(); err != nil {
+		log.Error("failed to read env file")
+	}
+
+	port := os.Getenv("PORT")
+	dbConnString := os.Getenv("DB")
 
 	postgresDB, err := internal.NewPostgresDB(dbConnString, log)
 	if err != nil {
