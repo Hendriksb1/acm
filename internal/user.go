@@ -30,7 +30,7 @@ func(s *Server) AddUser(ctx context.Context, req *pb.AddUserRequest) (*pb.AddUse
     user := &User{
 		Name: req.Name,
 		ChipCardID: req.ChipCardId,
-		AccessRights: req.AccessRights,
+		AccessRights: int32(req.AccessRights.Number()),
 	}
 
 	err := s.DB.AddUser(user)
@@ -48,10 +48,11 @@ func(s *Server) CheckAccess(ctx context.Context, req *pb.CheckAccessRequest) (*p
         return nil, status.Error(codes.InvalidArgument, "no id")
     }
 
-    if req.DoorLevel == 0 {
+    if req.DoorId == 0 {
         return nil, status.Error(codes.InvalidArgument, "no door level")
     }
 
+    // find user
 	user, err := s.DB.GetUserByChipCardId(req.ChipCardId)
 	if err != nil {
         fmt.Println("access denied: unknown chip card ID")
@@ -60,7 +61,16 @@ func(s *Server) CheckAccess(ctx context.Context, req *pb.CheckAccessRequest) (*p
 		}, nil
 	}
 
-    if user.AccessRights >= req.DoorLevel {
+    // find door
+    door, err := s.DB.GetDoorById(req.DoorId)
+    if err != nil {
+        fmt.Println("access denied: unknown door")
+		return &pb.CheckAccessResponse{
+			HasAccess: false,
+		}, nil
+	}
+
+    if user.AccessRights >= door.AccessLevel {
         fmt.Printf("access granted: welcome, %s!\n", user.Name)
         return &pb.CheckAccessResponse{
 			HasAccess: true,

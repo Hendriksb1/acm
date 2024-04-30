@@ -31,11 +31,19 @@ func main() {
 	}
 	log.Info("db connected", dbConnString)
 
+	// initialize table users
 	err = postgresDB.InnitUserTable(log)
 	if err != nil {
 		return
 	}
 	log.Info("users table initated")
+
+	// initialize table doors
+	postgresDB.InnitDoorsTable(log)
+	if err != nil {
+		return 
+	}
+	log.Info("doors table initated")
 
 	server := internal.ServerInit(postgresDB)
 	log.Info("server initated")

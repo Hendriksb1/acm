@@ -3,6 +3,7 @@ package internal
 import (
 	"database/sql"
 	"errors"
+	"fmt"
 
 	"golang.org/x/exp/slog"
 )
@@ -12,6 +13,7 @@ type Database interface {
 	AddUser(*User) error
 	DeleteUserByChipCardId(id string) error
 	GetUserByChipCardId(id string) (*User, error)
+	GetDoorById(id int32) (*Door, error)
 }
 
 // Postgres represents a PostgreSQL database.
@@ -97,4 +99,52 @@ func (p *Postgres) GetUserByChipCardId(id string) (*User, error) {
 	return user, nil
 }
 
+// InnitUserTable initializes the Users table in the database if it doesn't exist.
+func (p *Postgres) InnitDoorsTable(log *slog.Logger) error {
+	// Create Users table if it doesn't exist
+	_, err := p.db.Exec(`CREATE TABLE IF NOT EXISTS Doors (
+        Id TEXT PRIMARY KEY,
+        AccessRights INT
+    )`)
+	if err != nil {
+		log.Error("failed to create doors table database")
+		return err
+	}
 
+	log.Info("doors table created or already exists")
+	return nil
+}
+
+// GetDoorById looks up a door from the DB
+func (p *Postgres) GetDoorById(id int32) (*Door, error) {
+	row := p.db.QueryRow("SELECT Id, AccessLevel FROM Doors WHERE Id = &1", id)
+
+	door := &Door{}
+
+	err := row.Scan(&door.Id, &door.AccessLevel)
+	if err != nil {
+		fmt.Println("door not found")
+		return nil, err
+	}
+
+	return door, nil
+}
+
+// AddDoor adds a door in the DB
+func (p *Postgres) AddDoor(id string, level int32) error {
+	_, err := p.db.Exec("INSERT INTO Doors (Id, AccessLevel) VALUES ($1, $2)", id, level)
+	if err != nil {
+		return err
+	}
+	return nil
+}
+
+// Removes a door form the DB
+func (p *Postgres) RemoveDoor(id string) error {
+	// Execute the SQL DELETE statement to remove the user with the specified ChipCardID
+	_, err := p.db.Exec("DELETE FROM Doors WHERE Id = $1", id)
+	if err != nil {
+		return err
+	}
+	return nil
+}

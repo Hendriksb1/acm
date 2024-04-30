@@ -72,20 +72,199 @@ func (AccessLevel) EnumDescriptor() ([]byte, []int) {
 	return file_acm_proto_rawDescGZIP(), []int{0}
 }
 
+type AddDoorRequest struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	RequiredAccessLevel AccessLevel `protobuf:"varint,1,opt,name=requiredAccessLevel,proto3,enum=api.AccessLevel" json:"requiredAccessLevel,omitempty"`
+}
+
+func (x *AddDoorRequest) Reset() {
+	*x = AddDoorRequest{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_acm_proto_msgTypes[0]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *AddDoorRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AddDoorRequest) ProtoMessage() {}
+
+func (x *AddDoorRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_acm_proto_msgTypes[0]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AddDoorRequest.ProtoReflect.Descriptor instead.
+func (*AddDoorRequest) Descriptor() ([]byte, []int) {
+	return file_acm_proto_rawDescGZIP(), []int{0}
+}
+
+func (x *AddDoorRequest) GetRequiredAccessLevel() AccessLevel {
+	if x != nil {
+		return x.RequiredAccessLevel
+	}
+	return AccessLevel_NO_ACCESS
+}
+
+type AddDoorResponse struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+}
+
+func (x *AddDoorResponse) Reset() {
+	*x = AddDoorResponse{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_acm_proto_msgTypes[1]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *AddDoorResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AddDoorResponse) ProtoMessage() {}
+
+func (x *AddDoorResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_acm_proto_msgTypes[1]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AddDoorResponse.ProtoReflect.Descriptor instead.
+func (*AddDoorResponse) Descriptor() ([]byte, []int) {
+	return file_acm_proto_rawDescGZIP(), []int{1}
+}
+
+func (x *AddDoorResponse) GetId() string {
+	if x != nil {
+		return x.Id
+	}
+	return ""
+}
+
+type RemoveDoorRequest struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+}
+
+func (x *RemoveDoorRequest) Reset() {
+	*x = RemoveDoorRequest{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_acm_proto_msgTypes[2]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *RemoveDoorRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*RemoveDoorRequest) ProtoMessage() {}
+
+func (x *RemoveDoorRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_acm_proto_msgTypes[2]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use RemoveDoorRequest.ProtoReflect.Descriptor instead.
+func (*RemoveDoorRequest) Descriptor() ([]byte, []int) {
+	return file_acm_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *RemoveDoorRequest) GetId() string {
+	if x != nil {
+		return x.Id
+	}
+	return ""
+}
+
+type RemoveDoorResponse struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+}
+
+func (x *RemoveDoorResponse) Reset() {
+	*x = RemoveDoorResponse{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_acm_proto_msgTypes[3]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *RemoveDoorResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*RemoveDoorResponse) ProtoMessage() {}
+
+func (x *RemoveDoorResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_acm_proto_msgTypes[3]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use RemoveDoorResponse.ProtoReflect.Descriptor instead.
+func (*RemoveDoorResponse) Descriptor() ([]byte, []int) {
+	return file_acm_proto_rawDescGZIP(), []int{3}
+}
+
 type AddUserRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Name         string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
-	ChipCardId   string `protobuf:"bytes,2,opt,name=chipCardId,proto3" json:"chipCardId,omitempty"`
-	AccessRights int32  `protobuf:"varint,3,opt,name=AccessRights,proto3" json:"AccessRights,omitempty"`
+	Name         string      `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	ChipCardId   string      `protobuf:"bytes,2,opt,name=chipCardId,proto3" json:"chipCardId,omitempty"`
+	AccessRights AccessLevel `protobuf:"varint,3,opt,name=AccessRights,proto3,enum=api.AccessLevel" json:"AccessRights,omitempty"`
 }
 
 func (x *AddUserRequest) Reset() {
 	*x = AddUserRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_acm_proto_msgTypes[0]
+		mi := &file_acm_proto_msgTypes[4]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -98,7 +277,7 @@ func (x *AddUserRequest) String() string {
 func (*AddUserRequest) ProtoMessage() {}
 
 func (x *AddUserRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_acm_proto_msgTypes[0]
+	mi := &file_acm_proto_msgTypes[4]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -111,7 +290,7 @@ func (x *AddUserRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AddUserRequest.ProtoReflect.Descriptor instead.
 func (*AddUserRequest) Descriptor() ([]byte, []int) {
-	return file_acm_proto_rawDescGZIP(), []int{0}
+	return file_acm_proto_rawDescGZIP(), []int{4}
 }
 
 func (x *AddUserRequest) GetName() string {
@@ -128,11 +307,11 @@ func (x *AddUserRequest) GetChipCardId() string {
 	return ""
 }
 
-func (x *AddUserRequest) GetAccessRights() int32 {
+func (x *AddUserRequest) GetAccessRights() AccessLevel {
 	if x != nil {
 		return x.AccessRights
 	}
-	return 0
+	return AccessLevel_NO_ACCESS
 }
 
 type AddUserResponse struct {
@@ -144,7 +323,7 @@ type AddUserResponse struct {
 func (x *AddUserResponse) Reset() {
 	*x = AddUserResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_acm_proto_msgTypes[1]
+		mi := &file_acm_proto_msgTypes[5]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -157,7 +336,7 @@ func (x *AddUserResponse) String() string {
 func (*AddUserResponse) ProtoMessage() {}
 
 func (x *AddUserResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_acm_proto_msgTypes[1]
+	mi := &file_acm_proto_msgTypes[5]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -170,7 +349,7 @@ func (x *AddUserResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AddUserResponse.ProtoReflect.Descriptor instead.
 func (*AddUserResponse) Descriptor() ([]byte, []int) {
-	return file_acm_proto_rawDescGZIP(), []int{1}
+	return file_acm_proto_rawDescGZIP(), []int{5}
 }
 
 type CheckAccessRequest struct {
@@ -179,13 +358,13 @@ type CheckAccessRequest struct {
 	unknownFields protoimpl.UnknownFields
 
 	ChipCardId string `protobuf:"bytes,1,opt,name=chipCardId,proto3" json:"chipCardId,omitempty"`
-	DoorLevel  int32  `protobuf:"varint,2,opt,name=doorLevel,proto3" json:"doorLevel,omitempty"`
+	DoorId     int32  `protobuf:"varint,2,opt,name=doorId,proto3" json:"doorId,omitempty"`
 }
 
 func (x *CheckAccessRequest) Reset() {
 	*x = CheckAccessRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_acm_proto_msgTypes[2]
+		mi := &file_acm_proto_msgTypes[6]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -198,7 +377,7 @@ func (x *CheckAccessRequest) String() string {
 func (*CheckAccessRequest) ProtoMessage() {}
 
 func (x *CheckAccessRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_acm_proto_msgTypes[2]
+	mi := &file_acm_proto_msgTypes[6]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -211,7 +390,7 @@ func (x *CheckAccessRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CheckAccessRequest.ProtoReflect.Descriptor instead.
 func (*CheckAccessRequest) Descriptor() ([]byte, []int) {
-	return file_acm_proto_rawDescGZIP(), []int{2}
+	return file_acm_proto_rawDescGZIP(), []int{6}
 }
 
 func (x *CheckAccessRequest) GetChipCardId() string {
@@ -221,9 +400,9 @@ func (x *CheckAccessRequest) GetChipCardId() string {
 	return ""
 }
 
-func (x *CheckAccessRequest) GetDoorLevel() int32 {
+func (x *CheckAccessRequest) GetDoorId() int32 {
 	if x != nil {
-		return x.DoorLevel
+		return x.DoorId
 	}
 	return 0
 }
@@ -239,7 +418,7 @@ type CheckAccessResponse struct {
 func (x *CheckAccessResponse) Reset() {
 	*x = CheckAccessResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_acm_proto_msgTypes[3]
+		mi := &file_acm_proto_msgTypes[7]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -252,7 +431,7 @@ func (x *CheckAccessResponse) String() string {
 func (*CheckAccessResponse) ProtoMessage() {}
 
 func (x *CheckAccessResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_acm_proto_msgTypes[3]
+	mi := &file_acm_proto_msgTypes[7]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -265,7 +444,7 @@ func (x *CheckAccessResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CheckAccessResponse.ProtoReflect.Descriptor instead.
 func (*CheckAccessResponse) Descriptor() ([]byte, []int) {
-	return file_acm_proto_rawDescGZIP(), []int{3}
+	return file_acm_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *CheckAccessResponse) GetHasAccess() bool {
@@ -286,7 +465,7 @@ type DeleteUserByChipCardIdRequest struct {
 func (x *DeleteUserByChipCardIdRequest) Reset() {
 	*x = DeleteUserByChipCardIdRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_acm_proto_msgTypes[4]
+		mi := &file_acm_proto_msgTypes[8]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -299,7 +478,7 @@ func (x *DeleteUserByChipCardIdRequest) String() string {
 func (*DeleteUserByChipCardIdRequest) ProtoMessage() {}
 
 func (x *DeleteUserByChipCardIdRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_acm_proto_msgTypes[4]
+	mi := &file_acm_proto_msgTypes[8]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -312,7 +491,7 @@ func (x *DeleteUserByChipCardIdRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteUserByChipCardIdRequest.ProtoReflect.Descriptor instead.
 func (*DeleteUserByChipCardIdRequest) Descriptor() ([]byte, []int) {
-	return file_acm_proto_rawDescGZIP(), []int{4}
+	return file_acm_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *DeleteUserByChipCardIdRequest) GetChipCardId() string {
@@ -331,7 +510,7 @@ type DeleteUserByChipCardIdResponse struct {
 func (x *DeleteUserByChipCardIdResponse) Reset() {
 	*x = DeleteUserByChipCardIdResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_acm_proto_msgTypes[5]
+		mi := &file_acm_proto_msgTypes[9]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -344,7 +523,7 @@ func (x *DeleteUserByChipCardIdResponse) String() string {
 func (*DeleteUserByChipCardIdResponse) ProtoMessage() {}
 
 func (x *DeleteUserByChipCardIdResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_acm_proto_msgTypes[5]
+	mi := &file_acm_proto_msgTypes[9]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -357,27 +536,39 @@ func (x *DeleteUserByChipCardIdResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteUserByChipCardIdResponse.ProtoReflect.Descriptor instead.
 func (*DeleteUserByChipCardIdResponse) Descriptor() ([]byte, []int) {
-	return file_acm_proto_rawDescGZIP(), []int{5}
+	return file_acm_proto_rawDescGZIP(), []int{9}
 }
 
 var File_acm_proto protoreflect.FileDescriptor
 
 var file_acm_proto_rawDesc = []byte{
 	0x0a, 0x09, 0x61, 0x63, 0x6d, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x12, 0x03, 0x61, 0x70, 0x69,
-	0x22, 0x68, 0x0a, 0x0e, 0x41, 0x64, 0x64, 0x55, 0x73, 0x65, 0x72, 0x52, 0x65, 0x71, 0x75, 0x65,
-	0x73, 0x74, 0x12, 0x12, 0x0a, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09,
-	0x52, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x12, 0x1e, 0x0a, 0x0a, 0x63, 0x68, 0x69, 0x70, 0x43, 0x61,
-	0x72, 0x64, 0x49, 0x64, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0a, 0x63, 0x68, 0x69, 0x70,
-	0x43, 0x61, 0x72, 0x64, 0x49, 0x64, 0x12, 0x22, 0x0a, 0x0c, 0x41, 0x63, 0x63, 0x65, 0x73, 0x73,
-	0x52, 0x69, 0x67, 0x68, 0x74, 0x73, 0x18, 0x03, 0x20, 0x01, 0x28, 0x05, 0x52, 0x0c, 0x41, 0x63,
-	0x63, 0x65, 0x73, 0x73, 0x52, 0x69, 0x67, 0x68, 0x74, 0x73, 0x22, 0x11, 0x0a, 0x0f, 0x41, 0x64,
-	0x64, 0x55, 0x73, 0x65, 0x72, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x52, 0x0a,
-	0x12, 0x43, 0x68, 0x65, 0x63, 0x6b, 0x41, 0x63, 0x63, 0x65, 0x73, 0x73, 0x52, 0x65, 0x71, 0x75,
-	0x65, 0x73, 0x74, 0x12, 0x1e, 0x0a, 0x0a, 0x63, 0x68, 0x69, 0x70, 0x43, 0x61, 0x72, 0x64, 0x49,
-	0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0a, 0x63, 0x68, 0x69, 0x70, 0x43, 0x61, 0x72,
-	0x64, 0x49, 0x64, 0x12, 0x1c, 0x0a, 0x09, 0x64, 0x6f, 0x6f, 0x72, 0x4c, 0x65, 0x76, 0x65, 0x6c,
-	0x18, 0x02, 0x20, 0x01, 0x28, 0x05, 0x52, 0x09, 0x64, 0x6f, 0x6f, 0x72, 0x4c, 0x65, 0x76, 0x65,
-	0x6c, 0x22, 0x33, 0x0a, 0x13, 0x43, 0x68, 0x65, 0x63, 0x6b, 0x41, 0x63, 0x63, 0x65, 0x73, 0x73,
+	0x22, 0x54, 0x0a, 0x0e, 0x41, 0x64, 0x64, 0x44, 0x6f, 0x6f, 0x72, 0x52, 0x65, 0x71, 0x75, 0x65,
+	0x73, 0x74, 0x12, 0x42, 0x0a, 0x13, 0x72, 0x65, 0x71, 0x75, 0x69, 0x72, 0x65, 0x64, 0x41, 0x63,
+	0x63, 0x65, 0x73, 0x73, 0x4c, 0x65, 0x76, 0x65, 0x6c, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0e, 0x32,
+	0x10, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x41, 0x63, 0x63, 0x65, 0x73, 0x73, 0x4c, 0x65, 0x76, 0x65,
+	0x6c, 0x52, 0x13, 0x72, 0x65, 0x71, 0x75, 0x69, 0x72, 0x65, 0x64, 0x41, 0x63, 0x63, 0x65, 0x73,
+	0x73, 0x4c, 0x65, 0x76, 0x65, 0x6c, 0x22, 0x21, 0x0a, 0x0f, 0x41, 0x64, 0x64, 0x44, 0x6f, 0x6f,
+	0x72, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18,
+	0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x02, 0x69, 0x64, 0x22, 0x23, 0x0a, 0x11, 0x52, 0x65, 0x6d,
+	0x6f, 0x76, 0x65, 0x44, 0x6f, 0x6f, 0x72, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x0e,
+	0x0a, 0x02, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x02, 0x69, 0x64, 0x22, 0x14,
+	0x0a, 0x12, 0x52, 0x65, 0x6d, 0x6f, 0x76, 0x65, 0x44, 0x6f, 0x6f, 0x72, 0x52, 0x65, 0x73, 0x70,
+	0x6f, 0x6e, 0x73, 0x65, 0x22, 0x7a, 0x0a, 0x0e, 0x41, 0x64, 0x64, 0x55, 0x73, 0x65, 0x72, 0x52,
+	0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x12, 0x0a, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x18, 0x01,
+	0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x12, 0x1e, 0x0a, 0x0a, 0x63, 0x68,
+	0x69, 0x70, 0x43, 0x61, 0x72, 0x64, 0x49, 0x64, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0a,
+	0x63, 0x68, 0x69, 0x70, 0x43, 0x61, 0x72, 0x64, 0x49, 0x64, 0x12, 0x34, 0x0a, 0x0c, 0x41, 0x63,
+	0x63, 0x65, 0x73, 0x73, 0x52, 0x69, 0x67, 0x68, 0x74, 0x73, 0x18, 0x03, 0x20, 0x01, 0x28, 0x0e,
+	0x32, 0x10, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x41, 0x63, 0x63, 0x65, 0x73, 0x73, 0x4c, 0x65, 0x76,
+	0x65, 0x6c, 0x52, 0x0c, 0x41, 0x63, 0x63, 0x65, 0x73, 0x73, 0x52, 0x69, 0x67, 0x68, 0x74, 0x73,
+	0x22, 0x11, 0x0a, 0x0f, 0x41, 0x64, 0x64, 0x55, 0x73, 0x65, 0x72, 0x52, 0x65, 0x73, 0x70, 0x6f,
+	0x6e, 0x73, 0x65, 0x22, 0x4c, 0x0a, 0x12, 0x43, 0x68, 0x65, 0x63, 0x6b, 0x41, 0x63, 0x63, 0x65,
+	0x73, 0x73, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x1e, 0x0a, 0x0a, 0x63, 0x68, 0x69,
+	0x70, 0x43, 0x61, 0x72, 0x64, 0x49, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0a, 0x63,
+	0x68, 0x69, 0x70, 0x43, 0x61, 0x72, 0x64, 0x49, 0x64, 0x12, 0x16, 0x0a, 0x06, 0x64, 0x6f, 0x6f,
+	0x72, 0x49, 0x64, 0x18, 0x02, 0x20, 0x01, 0x28, 0x05, 0x52, 0x06, 0x64, 0x6f, 0x6f, 0x72, 0x49,
+	0x64, 0x22, 0x33, 0x0a, 0x13, 0x43, 0x68, 0x65, 0x63, 0x6b, 0x41, 0x63, 0x63, 0x65, 0x73, 0x73,
 	0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x1c, 0x0a, 0x09, 0x68, 0x61, 0x73, 0x41,
 	0x63, 0x63, 0x65, 0x73, 0x73, 0x18, 0x01, 0x20, 0x01, 0x28, 0x08, 0x52, 0x09, 0x68, 0x61, 0x73,
 	0x41, 0x63, 0x63, 0x65, 0x73, 0x73, 0x22, 0x3f, 0x0a, 0x1d, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65,
@@ -390,7 +581,7 @@ var file_acm_proto_rawDesc = []byte{
 	0x65, 0x73, 0x73, 0x4c, 0x65, 0x76, 0x65, 0x6c, 0x12, 0x0d, 0x0a, 0x09, 0x4e, 0x4f, 0x5f, 0x41,
 	0x43, 0x43, 0x45, 0x53, 0x53, 0x10, 0x00, 0x12, 0x0b, 0x0a, 0x07, 0x4c, 0x45, 0x56, 0x45, 0x4c,
 	0x5f, 0x31, 0x10, 0x01, 0x12, 0x0b, 0x0a, 0x07, 0x4c, 0x45, 0x56, 0x45, 0x4c, 0x5f, 0x32, 0x10,
-	0x02, 0x12, 0x09, 0x0a, 0x05, 0x41, 0x44, 0x4d, 0x49, 0x4e, 0x10, 0x03, 0x32, 0xf1, 0x01, 0x0a,
+	0x02, 0x12, 0x09, 0x0a, 0x05, 0x41, 0x44, 0x4d, 0x49, 0x4e, 0x10, 0x03, 0x32, 0xe6, 0x02, 0x0a,
 	0x14, 0x41, 0x63, 0x63, 0x65, 0x73, 0x73, 0x43, 0x6f, 0x6e, 0x74, 0x72, 0x6f, 0x6c, 0x4d, 0x61,
 	0x6e, 0x61, 0x67, 0x65, 0x72, 0x12, 0x34, 0x0a, 0x07, 0x41, 0x64, 0x64, 0x55, 0x73, 0x65, 0x72,
 	0x12, 0x13, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x41, 0x64, 0x64, 0x55, 0x73, 0x65, 0x72, 0x52, 0x65,
@@ -406,7 +597,15 @@ var file_acm_proto_rawDesc = []byte{
 	0x61, 0x70, 0x69, 0x2e, 0x43, 0x68, 0x65, 0x63, 0x6b, 0x41, 0x63, 0x63, 0x65, 0x73, 0x73, 0x52,
 	0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x18, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x43, 0x68, 0x65,
 	0x63, 0x6b, 0x41, 0x63, 0x63, 0x65, 0x73, 0x73, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65,
-	0x42, 0x05, 0x5a, 0x03, 0x2f, 0x70, 0x62, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x12, 0x34, 0x0a, 0x07, 0x41, 0x64, 0x64, 0x44, 0x6f, 0x6f, 0x72, 0x12, 0x13, 0x2e, 0x61, 0x70,
+	0x69, 0x2e, 0x41, 0x64, 0x64, 0x44, 0x6f, 0x6f, 0x72, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74,
+	0x1a, 0x14, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x41, 0x64, 0x64, 0x44, 0x6f, 0x6f, 0x72, 0x52, 0x65,
+	0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x3d, 0x0a, 0x0a, 0x52, 0x65, 0x6d, 0x6f, 0x76, 0x65,
+	0x44, 0x6f, 0x6f, 0x72, 0x12, 0x16, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x52, 0x65, 0x6d, 0x6f, 0x76,
+	0x65, 0x44, 0x6f, 0x6f, 0x72, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x17, 0x2e, 0x61,
+	0x70, 0x69, 0x2e, 0x52, 0x65, 0x6d, 0x6f, 0x76, 0x65, 0x44, 0x6f, 0x6f, 0x72, 0x52, 0x65, 0x73,
+	0x70, 0x6f, 0x6e, 0x73, 0x65, 0x42, 0x05, 0x5a, 0x03, 0x2f, 0x70, 0x62, 0x62, 0x06, 0x70, 0x72,
+	0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -422,28 +621,38 @@ func file_acm_proto_rawDescGZIP() []byte {
 }
 
 var file_acm_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
-var file_acm_proto_msgTypes = make([]protoimpl.MessageInfo, 6)
+var file_acm_proto_msgTypes = make([]protoimpl.MessageInfo, 10)
 var file_acm_proto_goTypes = []interface{}{
 	(AccessLevel)(0),                       // 0: api.AccessLevel
-	(*AddUserRequest)(nil),                 // 1: api.AddUserRequest
-	(*AddUserResponse)(nil),                // 2: api.AddUserResponse
-	(*CheckAccessRequest)(nil),             // 3: api.CheckAccessRequest
-	(*CheckAccessResponse)(nil),            // 4: api.CheckAccessResponse
-	(*DeleteUserByChipCardIdRequest)(nil),  // 5: api.DeleteUserByChipCardIdRequest
-	(*DeleteUserByChipCardIdResponse)(nil), // 6: api.DeleteUserByChipCardIdResponse
+	(*AddDoorRequest)(nil),                 // 1: api.AddDoorRequest
+	(*AddDoorResponse)(nil),                // 2: api.AddDoorResponse
+	(*RemoveDoorRequest)(nil),              // 3: api.RemoveDoorRequest
+	(*RemoveDoorResponse)(nil),             // 4: api.RemoveDoorResponse
+	(*AddUserRequest)(nil),                 // 5: api.AddUserRequest
+	(*AddUserResponse)(nil),                // 6: api.AddUserResponse
+	(*CheckAccessRequest)(nil),             // 7: api.CheckAccessRequest
+	(*CheckAccessResponse)(nil),            // 8: api.CheckAccessResponse
+	(*DeleteUserByChipCardIdRequest)(nil),  // 9: api.DeleteUserByChipCardIdRequest
+	(*DeleteUserByChipCardIdResponse)(nil), // 10: api.DeleteUserByChipCardIdResponse
 }
 var file_acm_proto_depIdxs = []int32{
-	1, // 0: api.AccessControlManager.AddUser:input_type -> api.AddUserRequest
-	5, // 1: api.AccessControlManager.DeleteUserByChipCardId:input_type -> api.DeleteUserByChipCardIdRequest
-	3, // 2: api.AccessControlManager.CheckAccess:input_type -> api.CheckAccessRequest
-	2, // 3: api.AccessControlManager.AddUser:output_type -> api.AddUserResponse
-	6, // 4: api.AccessControlManager.DeleteUserByChipCardId:output_type -> api.DeleteUserByChipCardIdResponse
-	4, // 5: api.AccessControlManager.CheckAccess:output_type -> api.CheckAccessResponse
-	3, // [3:6] is the sub-list for method output_type
-	0, // [0:3] is the sub-list for method input_type
-	0, // [0:0] is the sub-list for extension type_name
-	0, // [0:0] is the sub-list for extension extendee
-	0, // [0:0] is the sub-list for field type_name
+	0,  // 0: api.AddDoorRequest.requiredAccessLevel:type_name -> api.AccessLevel
+	0,  // 1: api.AddUserRequest.AccessRights:type_name -> api.AccessLevel
+	5,  // 2: api.AccessControlManager.AddUser:input_type -> api.AddUserRequest
+	9,  // 3: api.AccessControlManager.DeleteUserByChipCardId:input_type -> api.DeleteUserByChipCardIdRequest
+	7,  // 4: api.AccessControlManager.CheckAccess:input_type -> api.CheckAccessRequest
+	1,  // 5: api.AccessControlManager.AddDoor:input_type -> api.AddDoorRequest
+	3,  // 6: api.AccessControlManager.RemoveDoor:input_type -> api.RemoveDoorRequest
+	6,  // 7: api.AccessControlManager.AddUser:output_type -> api.AddUserResponse
+	10, // 8: api.AccessControlManager.DeleteUserByChipCardId:output_type -> api.DeleteUserByChipCardIdResponse
+	8,  // 9: api.AccessControlManager.CheckAccess:output_type -> api.CheckAccessResponse
+	2,  // 10: api.AccessControlManager.AddDoor:output_type -> api.AddDoorResponse
+	4,  // 11: api.AccessControlManager.RemoveDoor:output_type -> api.RemoveDoorResponse
+	7,  // [7:12] is the sub-list for method output_type
+	2,  // [2:7] is the sub-list for method input_type
+	2,  // [2:2] is the sub-list for extension type_name
+	2,  // [2:2] is the sub-list for extension extendee
+	0,  // [0:2] is the sub-list for field type_name
 }
 
 func init() { file_acm_proto_init() }
@@ -453,7 +662,7 @@ func file_acm_proto_init() {
 	}
 	if !protoimpl.UnsafeEnabled {
 		file_acm_proto_msgTypes[0].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*AddUserRequest); i {
+			switch v := v.(*AddDoorRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -465,7 +674,7 @@ func file_acm_proto_init() {
 			}
 		}
 		file_acm_proto_msgTypes[1].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*AddUserResponse); i {
+			switch v := v.(*AddDoorResponse); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -477,7 +686,7 @@ func file_acm_proto_init() {
 			}
 		}
 		file_acm_proto_msgTypes[2].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*CheckAccessRequest); i {
+			switch v := v.(*RemoveDoorRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -489,7 +698,7 @@ func file_acm_proto_init() {
 			}
 		}
 		file_acm_proto_msgTypes[3].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*CheckAccessResponse); i {
+			switch v := v.(*RemoveDoorResponse); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -501,7 +710,7 @@ func file_acm_proto_init() {
 			}
 		}
 		file_acm_proto_msgTypes[4].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*DeleteUserByChipCardIdRequest); i {
+			switch v := v.(*AddUserRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -513,6 +722,54 @@ func file_acm_proto_init() {
 			}
 		}
 		file_acm_proto_msgTypes[5].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*AddUserResponse); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_acm_proto_msgTypes[6].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*CheckAccessRequest); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_acm_proto_msgTypes[7].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*CheckAccessResponse); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_acm_proto_msgTypes[8].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*DeleteUserByChipCardIdRequest); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_acm_proto_msgTypes[9].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*DeleteUserByChipCardIdResponse); i {
 			case 0:
 				return &v.state
@@ -531,7 +788,7 @@ func file_acm_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_acm_proto_rawDesc,
 			NumEnums:      1,
-			NumMessages:   6,
+			NumMessages:   10,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

@@ -9,6 +9,9 @@ service AccessControlManager {
     rpc AddUser (AddUserRequest) returns (AddUserResponse);
     rpc DeleteUserByChipCardId (DeleteUserByChipCardIdRequest) returns (DeleteUserByChipCardIdResponse);
     rpc CheckAccess (CheckAccessRequest) returns (CheckAccessResponse);
+    // Door
+    rpc AddDoor (AddDoorRequest) returns (AddDoorResponse);
+    rpc RemoveDoor (RemoveDoorRequest) returns (RemoveDoorResponse);
 }
 
 enum AccessLevel {
@@ -18,17 +21,29 @@ enum AccessLevel {
     ADMIN = 3;
 }
 
+message AddDoorRequest {
+    AccessLevel requiredAccessLevel = 1;
+}
+message AddDoorResponse {
+    string id = 1;
+}
+
+message RemoveDoorRequest {
+    string id = 1;
+}
+message RemoveDoorResponse {}
+
 message AddUserRequest {
     string name = 1;
     string chipCardId = 2;
-    int32 AccessRights = 3;
+    AccessLevel AccessRights = 3;
 }
 
 message AddUserResponse {}
 
 message CheckAccessRequest {
     string chipCardId = 1;
-    int32 doorLevel = 2;
+    int32 doorId = 2;
 }
 
 message CheckAccessResponse {

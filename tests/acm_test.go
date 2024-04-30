@@ -76,7 +76,7 @@ func TestMain(m *testing.M) {
 	addUserReq := &pb.AddUserRequest{
 		Name:         "Anna",
 		ChipCardId:   "123",
-		AccessRights: int32(pb.AccessLevel_LEVEL_1),
+		AccessRights: pb.AccessLevel_LEVEL_1,
 	}
 	_, err = testClient.AddUser(context.Background(), addUserReq)
 	if err != nil {
@@ -118,7 +118,7 @@ func TestCheckAccess(t *testing.T) {
 	for _, c := range testCases {
 		checkRequest := &pb.CheckAccessRequest{
 			ChipCardId: c.ChipCardID,
-			DoorLevel:  int32(c.DoorLevel),
+			DoorId:  888888, // TODO create a door for test purposes 
 		}
 
 		res, err := testClient.CheckAccess(context.Background(), checkRequest)

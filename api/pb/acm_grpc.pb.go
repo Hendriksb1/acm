@@ -25,6 +25,9 @@ type AccessControlManagerClient interface {
 	AddUser(ctx context.Context, in *AddUserRequest, opts ...grpc.CallOption) (*AddUserResponse, error)
 	DeleteUserByChipCardId(ctx context.Context, in *DeleteUserByChipCardIdRequest, opts ...grpc.CallOption) (*DeleteUserByChipCardIdResponse, error)
 	CheckAccess(ctx context.Context, in *CheckAccessRequest, opts ...grpc.CallOption) (*CheckAccessResponse, error)
+	// Door
+	AddDoor(ctx context.Context, in *AddDoorRequest, opts ...grpc.CallOption) (*AddDoorResponse, error)
+	RemoveDoor(ctx context.Context, in *RemoveDoorRequest, opts ...grpc.CallOption) (*RemoveDoorResponse, error)
 }
 
 type accessControlManagerClient struct {
@@ -62,6 +65,24 @@ func (c *accessControlManagerClient) CheckAccess(ctx context.Context, in *CheckA
 	return out, nil
 }
 
+func (c *accessControlManagerClient) AddDoor(ctx context.Context, in *AddDoorRequest, opts ...grpc.CallOption) (*AddDoorResponse, error) {
+	out := new(AddDoorResponse)
+	err := c.cc.Invoke(ctx, "/api.AccessControlManager/AddDoor", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *accessControlManagerClient) RemoveDoor(ctx context.Context, in *RemoveDoorRequest, opts ...grpc.CallOption) (*RemoveDoorResponse, error) {
+	out := new(RemoveDoorResponse)
+	err := c.cc.Invoke(ctx, "/api.AccessControlManager/RemoveDoor", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // AccessControlManagerServer is the server API for AccessControlManager service.
 // All implementations must embed UnimplementedAccessControlManagerServer
 // for forward compatibility
@@ -69,6 +90,9 @@ type AccessControlManagerServer interface {
 	AddUser(context.Context, *AddUserRequest) (*AddUserResponse, error)
 	DeleteUserByChipCardId(context.Context, *DeleteUserByChipCardIdRequest) (*DeleteUserByChipCardIdResponse, error)
 	CheckAccess(context.Context, *CheckAccessRequest) (*CheckAccessResponse, error)
+	// Door
+	AddDoor(context.Context, *AddDoorRequest) (*AddDoorResponse, error)
+	RemoveDoor(context.Context, *RemoveDoorRequest) (*RemoveDoorResponse, error)
 	mustEmbedUnimplementedAccessControlManagerServer()
 }
 
@@ -84,6 +108,12 @@ func (UnimplementedAccessControlManagerServer) DeleteUserByChipCardId(context.Co
 }
 func (UnimplementedAccessControlManagerServer) CheckAccess(context.Context, *CheckAccessRequest) (*CheckAccessResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CheckAccess not implemented")
+}
+func (UnimplementedAccessControlManagerServer) AddDoor(context.Context, *AddDoorRequest) (*AddDoorResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AddDoor not implemented")
+}
+func (UnimplementedAccessControlManagerServer) RemoveDoor(context.Context, *RemoveDoorRequest) (*RemoveDoorResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method RemoveDoor not implemented")
 }
 func (UnimplementedAccessControlManagerServer) mustEmbedUnimplementedAccessControlManagerServer() {}
 
@@ -152,6 +182,42 @@ func _AccessControlManager_CheckAccess_Handler(srv interface{}, ctx context.Cont
 	return interceptor(ctx, in, info, handler)
 }
 
+func _AccessControlManager_AddDoor_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AddDoorRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AccessControlManagerServer).AddDoor(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.AccessControlManager/AddDoor",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AccessControlManagerServer).AddDoor(ctx, req.(*AddDoorRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AccessControlManager_RemoveDoor_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RemoveDoorRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AccessControlManagerServer).RemoveDoor(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.AccessControlManager/RemoveDoor",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AccessControlManagerServer).RemoveDoor(ctx, req.(*RemoveDoorRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // AccessControlManager_ServiceDesc is the grpc.ServiceDesc for AccessControlManager service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -170,6 +236,14 @@ var AccessControlManager_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "CheckAccess",
 			Handler:    _AccessControlManager_CheckAccess_Handler,
+		},
+		{
+			MethodName: "AddDoor",
+			Handler:    _AccessControlManager_AddDoor_Handler,
+		},
+		{
+			MethodName: "RemoveDoor",
+			Handler:    _AccessControlManager_RemoveDoor_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
